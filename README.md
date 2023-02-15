@@ -41,3 +41,13 @@ Nos dois casos, a senha é **guess-pass**.
 O banco de dados tem o nome **guess-who** e é acessível pelo endereço **localhost**, na porta **5432**.
 
 > Mesmo durante o devesvolvimento, recomenda-se o uso do usuário **guess-user**.
+
+## Reutilizar em outros projetos (repositórios)
+
+Se algum outro projeto desejar utilizar este banco de dados, no repositório do novo projeto, utilize os comandos:
+
+```bash
+> mkdir database
+> git remote add -f database https://github.com/LVRodrigues/guess-who-database.git
+> git pull -s subtree database main
+```
