@@ -4,9 +4,8 @@ use async_graphql::{
 };
 use async_graphql_rocket::*;
 use rocket::{response::content, *};
+use sea_orm::{Database, DatabaseConnection, DbErr};
 use schema::*;
-use sea_orm::*;
-// use sea_orm::{Database, DatabaseConnection, DbErr};
 
 mod model;
 mod schema;
@@ -25,14 +24,9 @@ async fn graphql_request(schema: &State<SchemaType>, request: GraphQLRequest) ->
     request.execute(schema).await
 }
 
-#[rocket::get("/graphql")]
-fn graphql_playground() -> content::RawHtml<String> {
+#[rocket::get("/")]
+fn index() -> content::RawHtml<String> {
     content::RawHtml(playground_source(GraphQLPlaygroundConfig::new("/graphql")))
-}
-
-#[get("/")]
-async fn index() -> &'static str {
-    "Hello, Luciano!"
 }
 
 #[launch]
@@ -46,5 +40,5 @@ async fn rocket() -> _ {
         .finish();
     rocket::build()
         .manage(schema)
-        .mount("/", routes![index, graphql_request, graphql_playground])
+        .mount("/", routes![index, graphql_request])
 }
