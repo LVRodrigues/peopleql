@@ -16,10 +16,3 @@ impl QueryRoot {
     }
 }
 
-#[ComplexObject]
-impl cards::Model {
-    async fn cards(&self, ctx: &Context<'_>) -> Result<Vec<questions::Model>, DbErr> {
-        let connection = ctx.data::<DatabaseConnection>().unwrap();
-        self.find_related(Questions).all(connection).await
-    }
-}
