@@ -1,5 +1,5 @@
 use crate::model::{prelude::*, *};
-use async_graphql::{ComplexObject, Context, Object};
+use async_graphql::{Context, Object};
 use sea_orm::*;
 
 pub(crate) struct QueryRoot;

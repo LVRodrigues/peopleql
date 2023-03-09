@@ -38,6 +38,7 @@ async fn rocket() -> _ {
     let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
         .data(connection)
         .finish();
+    println!("{}", &schema.sdl());
     rocket::build()
         .manage(schema)
         .mount("/", routes![index, graphql_request])
